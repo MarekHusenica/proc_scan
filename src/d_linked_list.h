@@ -10,13 +10,15 @@ void linked_list_free(linked_list_t *l_list);
 node_t *linked_get_first(linked_list_t *l_list);
 node_t *linked_get_last(linked_list_t *l_list);
 node_t *linked_get_active(linked_list_t *l_list);
-node_t *linked_get_after_active(linked_list_t *l_list);
-node_t *linked_get_before_active(linked_list_t *l_list);
 
 int linked_insert_first(linked_list_t *l_list, void *item);
 int linked_insert_last(linked_list_t *l_list, void *item);
 int linked_insert_after_active(linked_list_t *l_list, void *item);
 int linked_insert_before_active(linked_list_t *l_list, void *item);
+
+int linked_delete_first(linked_list_t *l_list);
+int linked_delete_last(linked_list_t *l_list);
+int linked_delete_active(linked_list_t *l_list);
 
 int linked_set_active_next(linked_list_t *l_list);
 int linked_set_active_prev(linked_list_t *l_list);

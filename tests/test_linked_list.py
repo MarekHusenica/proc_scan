@@ -31,10 +31,56 @@ def test_active_movement(empty_list):
 
     lib.linked_insert_after_active(empty_list, ctypes.c_void_p(20))
 
+    lib.linked_insert_last(empty_list, ctypes.c_void_p(30))
+
     active = lib.linked_get_active(empty_list)
     assert active.contents.item == 10
 
     lib.linked_set_active_next(empty_list)
     active = lib.linked_get_active(empty_list)
     assert active.contents.item == 20
-    # TODO: Add a third element and check get_active_last
+
+    lib.linked_set_active_prev(empty_list)
+    active = lib.linked_get_active(empty_list)
+    assert active.contents.item == 10
+
+    lib.linked_set_active_last(empty_list)
+    active = lib.linked_get_active(empty_list)
+    assert active.contents.item == 30
+
+def test_deletion_logic(empty_list):
+    lib.linked_insert_first(empty_list, ctypes.c_void_p(50))
+    lib.linked_insert_first(empty_list, ctypes.c_void_p(40))
+    lib.linked_insert_first(empty_list, ctypes.c_void_p(30))
+    lib.linked_insert_first(empty_list, ctypes.c_void_p(20))
+    lib.linked_insert_first(empty_list, ctypes.c_void_p(10))
+
+    lib.linked_set_active_last(empty_list)
+    lib.linked_set_active_prev(empty_list)
+
+    delete_ret = lib.linked_delete_active(empty_list)
+    active = lib.linked_get_active(empty_list)
+    assert delete_ret == 1
+    assert not active
+
+    active = lib.linked_get_last(empty_list)
+    assert active.contents.item == 50
+
+    lib.linked_set_active_last(empty_list)
+    lib.linked_set_active_prev(empty_list)
+    active = lib.linked_get_active(empty_list)
+    assert active.contents.item == 30
+    assert active.contents.next.contents.item == 50
+    assert active.contents.prev.contents.item == 20
+
+    lib.linked_delete_last(empty_list)
+    active = lib.linked_get_last(empty_list)
+    assert active.contents.item == 30
+    assert not active.contents.next
+    assert active.contents.prev.contents.item == 20
+
+    lib.linked_delete_first(empty_list)
+    active = lib.linked_get_first(empty_list)
+    assert active.contents.item == 20
+    assert not active.contents.prev
+    assert active.contents.next.contents.item == 30
