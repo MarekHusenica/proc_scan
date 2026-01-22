@@ -7,7 +7,7 @@ linked_list_t linked_list_init() {
 }
 
 void linked_list_free(linked_list_t *l_list) {
-    if (linked_set_active_first(l_list)) return;
+    if (!linked_set_active_first(l_list)) return;
 
     node_t *active_node;
     while ((active_node = linked_get_active(l_list)) != NULL) {

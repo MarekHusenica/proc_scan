@@ -22,7 +22,7 @@ class DLList(ctypes.Structure):
         ("active", ctypes.POINTER(Node))
     ]
 
-lib_path = os.path.join(os.path.dirname(__file__), "liblinkedlist.so")
+lib_path = os.path.join(os.path.dirname(__file__), "../linked_lib.so")
 lib = ctypes.CDLL(lib_path)
 
 # Init and Free
