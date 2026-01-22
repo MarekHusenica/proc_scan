@@ -1,6 +1,6 @@
 import pytest
 import ctypes
-from list_wrapper import lib, DLList, Node
+from .list_wrapper import lib, DLList, Node
 
 @pytest.fixture
 def empty_list():

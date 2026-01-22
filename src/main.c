@@ -18,6 +18,7 @@ int main() {
     DIR *proc_dir = opendir("/proc");
     if (!proc_dir) {
         fprintf(stderr, "Failed to \"proc\" directory\n");
+        closedir(proc_dir);
         return 1;
     }
 
@@ -42,12 +43,17 @@ int main() {
                 continue;
             }
 
-            memcpy(proc->pid, proc_entry->d_name, 16);
+            strncpy(proc->pid, proc_entry->d_name, 16);
 
             char f_path_buff[292];
             snprintf(f_path_buff, 292, "/proc/%s/comm", proc_entry->d_name);
 
             FILE *comm_file = fopen(f_path_buff, "r");
+            if (!comm_file) {
+                fprintf(stderr, "Couldn't open comm file for PID: %s\n", proc_entry->d_name);
+                free(proc);
+                continue;
+            }
             fgets(proc->name, 64, comm_file);
             fclose(comm_file);
 
@@ -71,4 +77,5 @@ int main() {
         free(proc);
         linked_delete_active(&l_list);
     }
+    linked_list_free(&l_list);
 }
