@@ -7,10 +7,10 @@
 A Unix-style `proc_scan` utility written in **C11**
 
 ## Motivation
-I was bored and wanted to make something quick :D
-This project is mainly for learning ctypes and library testing in python
-The tests are very simple, and don't really test much
-The doubly linked list implementation can be improved
+* I was bored and wanted to make something quick :D
+* This project is mainly for learning ctypes and library testing in python
+* The tests are very simple, and don't really test much
+* The doubly linked list implementation can be improved
 
 ## Tech Stack
 * **Core:** C11, GCC
