@@ -1,18 +1,6 @@
 #include "d_linked_list.h"
 #include <stdlib.h>
 
-struct node {
-    void *item;
-    node_t *next;
-    node_t *prev;
-};
-
-struct linked_list {
-    node_t *first;
-    node_t *last;
-    node_t *active;
-};
-
 linked_list_t linked_list_init() {
     linked_list_t list = {NULL, NULL, NULL};
     return list;

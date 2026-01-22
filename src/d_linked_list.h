@@ -1,8 +1,19 @@
 #ifndef D_LINKED_LIST_H
 #define D_LINKED_LIST_H
 
-typedef struct linked_list linked_list_t;
 typedef struct node node_t;
+
+struct node {
+    void *item;
+    struct node *next;
+    struct node *prev;
+};
+
+typedef struct linked_list {
+    node_t *first;
+    node_t *last;
+    node_t *active;
+} linked_list_t;
 
 linked_list_t linked_list_init();
 void linked_list_free(linked_list_t *l_list);
