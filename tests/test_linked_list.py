@@ -7,7 +7,9 @@ def empty_list():
     l_list = lib.linked_list_init()
     l_ptr = ctypes.pointer(l_list)
     yield l_ptr
-    lib.linked_list_free(l_ptr)
+    
+    while lib.linked_delete_first(l_ptr):
+        pass
 
 def test_insertion_logic(empty_list):
     item1 = ctypes.c_void_p(101)

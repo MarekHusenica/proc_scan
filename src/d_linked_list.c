@@ -7,13 +7,13 @@ linked_list_t linked_list_init() {
 }
 
 void linked_list_free(linked_list_t *l_list) {
-    if (!linked_set_active_first(l_list)) return;
+    node_t *curr_node = linked_get_first(l_list);
 
-    node_t *active_node;
-    while ((active_node = linked_get_active(l_list)) != NULL) {
-        linked_set_active_next(l_list);
-        free(active_node);
-        active_node = NULL;
+    while (curr_node != NULL) {
+        node_t *next_node = curr_node->next;
+        free(curr_node->item);
+        free(curr_node);
+        curr_node = next_node;
     }
 
     l_list->first = NULL;

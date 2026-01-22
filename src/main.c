@@ -69,13 +69,13 @@ int main() {
 
     printf("PID      name\n\n");
 
-    while (linked_set_active_first(&l_list)) {
-        node_t *active_node = linked_get_active(&l_list);
-        proc_t *proc = active_node->item;
-        printf("%-8s %-32s\n", proc->pid, proc->name);
-
-        free(proc);
-        linked_delete_active(&l_list);
+    if (linked_set_active_first(&l_list)) {
+        do {
+            node_t *active_node = linked_get_active(&l_list);
+            proc_t *proc = active_node->item;
+            printf("%-8s %-32s\n", proc->pid, proc->name);
+        } while (linked_set_active_next(&l_list));
     }
     linked_list_free(&l_list);
+    return 0;
 }
